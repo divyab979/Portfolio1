@@ -6,9 +6,12 @@ import ClientHomeView from "@/components/client-view/home";
 import ClientProjectView from "@/components/client-view/project";
 import ClientSkillView from "@/components/client-view/skills";
 
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://portfolio1-lvd5.vercel.app";
+
 async function extractAllDatas(currentSection) {
   const res = await fetch(
-    `http://localhost:3000/api/${currentSection}/get?ts=${Date.now()}`,
+    `${API_URL}/api/${currentSection}/get?ts=${Date.now()}`,
     {
       method: "GET",
       cache: "no-store",
@@ -16,8 +19,7 @@ async function extractAllDatas(currentSection) {
   );
 
   const data = await res.json();
-
-  return data && data.data;
+  return data?.data;
 }
 
 export default async function Home() {
@@ -38,9 +40,7 @@ export default async function Home() {
       <ClientHomeView />
       <ClientAboutView
         id="about"
-        data={
-          aboutSectionData && aboutSectionData.length ? aboutSectionData[0] : []
-        }
+        data={aboutSectionData?.length ? aboutSectionData[0] : []}
       />
       <ClientExperienceView data={experienceSectionData} />
       <ClientProjectView data={projectSectionData} />
