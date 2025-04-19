@@ -58,6 +58,7 @@ export default function ClientSkillView({ data }) {
       </Box>
 
       {/* Horizontal Scroll Container */}
+      {/* Horizontal Scroll Container */}
       <Box
         sx={{
           position: "relative",
@@ -65,77 +66,88 @@ export default function ClientSkillView({ data }) {
           overflowX: "auto",
           pb: 2,
           px: 1,
-          display: "flex",
-          gap: 2,
         }}
       >
-        {/* Horizontal Ribbon Background (unrotated) */}
         <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "250px",
-            backgroundColor: "rgba(255,194,188,0.2)",
-            zIndex: 0,
-          }}
-        />
-        {skills.length > 0 ? (
-          skills.map((skill, index) => (
-            <Box
-              key={skill._id || index}
-              sx={{
-                position: "relative",
-                flexShrink: 0,
-                width: "200px",
-                height: "250px",
-                borderRadius: "8px",
-                overflow: "hidden",
-                zIndex: 1,
-                cursor: "pointer",
-              }}
-            >
-              {skill.skillImage && (
+          sx={{ position: "relative", width: "max-content", display: "flex" }}
+        >
+          {/* Pink Light Hue Background */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "250px",
+              backgroundColor: "rgba(255,194,188,0.2)",
+              zIndex: 0,
+            }}
+          />
+
+          {/* Skill Cards */}
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              zIndex: 1,
+            }}
+          >
+            {skills.length > 0 ? (
+              skills.map((skill, index) => (
                 <Box
-                  component="img"
-                  src={skill.skillImage}
-                  alt={skill.skillTitle}
-                  sx={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              )}
-              {/* Yellow Glass-Like Overlay on Hover */}
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "rgba(255,223,100,0.3)",
-                  backdropFilter: "blur(5px)",
-                  opacity: 0,
-                  transition: "opacity 0.3s ease",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  "&:hover": { opacity: 1 },
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: "bold", color: "#333" }}
+                  key={skill._id || index}
+                  sx={{
+                    flexShrink: 0,
+                    width: "200px",
+                    height: "250px",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                    position: "relative",
+                    cursor: "pointer",
+                  }}
                 >
-                  {skill.skillTitle}
-                </Typography>
-              </Box>
-            </Box>
-          ))
-        ) : (
-          <Typography variant="h6" align="center">
-            No Skill Data Available.
-          </Typography>
-        )}
+                  {skill.skillImage && (
+                    <Box
+                      component="img"
+                      src={skill.skillImage}
+                      alt={skill.skillTitle}
+                      sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  )}
+                  {/* Yellow Glass Hover Effect */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      backgroundColor: "rgba(255,223,100,0.3)",
+                      backdropFilter: "blur(5px)",
+                      opacity: 0,
+                      transition: "opacity 0.3s ease",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      "&:hover": { opacity: 1 },
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{ fontWeight: "bold", color: "#333" }}
+                    >
+                      {skill.skillTitle}
+                    </Typography>
+                  </Box>
+                </Box>
+              ))
+            ) : (
+              <Typography variant="h6" align="center">
+                No Skill Data Available.
+              </Typography>
+            )}
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
